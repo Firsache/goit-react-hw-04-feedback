@@ -3,7 +3,7 @@ import { GlobalStyles } from 'styles/globalStyles.styled';
 import { Container } from './App.styled';
 import { useState } from 'react';
 
-export const App = () => {
+export function App() {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
@@ -11,9 +11,19 @@ export const App = () => {
   let total = good + bad + neutral;
 
   const onLeaveFeedback = option => {
-    if (option === 'good') setGood(prevState => prevState + 1);
-    if (option === 'neutral') setNeutral(prevState => prevState + 1);
-    if (option === 'bad') setBad(prevState => prevState + 1);
+    switch (option) {
+      case 'good':
+        setGood(prevState => prevState + 1);
+        break;
+      case 'neutral':
+        setNeutral(prevState => prevState + 1);
+        break;
+      case 'bad':
+        setBad(prevState => prevState + 1);
+        break;
+      default:
+        return;
+    }
   };
 
   const countPositiveFeedbackPercentage = () => {
@@ -42,4 +52,4 @@ export const App = () => {
       <GlobalStyles />
     </Container>
   );
-};
+}
